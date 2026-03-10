@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.next
+.git
+.DS_Store
+*.log
+Dockerfile*
+docker-compose*
+nginx/*
+.env.local
+

@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is the **kaixun.online** personal site: Next.js (App Router) + Prisma + PostgreSQL, with auth (email + GitHub), comments, and an admin dashboard.
+
+## Features
+
+- **Auth**: Email/password sign up and sign in; GitHub OAuth (optional).
+- **Account linking**: If you already have an account with the same email and later sign in with GitHub, the GitHub account is linked to that user automatically.
+- **Posts**: Home lists published posts; each post has a detail page with comments.
+- **Admin** (`/admin`): Manage posts and comments (admin role required).
+
+## GitHub OAuth
+
+1. In [GitHub Developer Settings](https://github.com/settings/developers), create an OAuth App.
+2. Set **Authorization callback URL** to:
+   - Local: `http://localhost:3000/api/auth/callback/github`
+   - Production: `https://kaixun.online/api/auth/callback/github`
+3. Put `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in `.env`.
 
 ## Getting Started
 

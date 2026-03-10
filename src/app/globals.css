@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -10,6 +11,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-tech: var(--font-orbitron), ui-sans-serif, sans-serif;
+}
+
+@keyframes slide {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +26,79 @@
   }
 }
 
+@keyframes slide {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes glitch-flicker {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.4; }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.font-tech {
+  font-family: var(--font-orbitron), ui-sans-serif, sans-serif;
+}
+
+/* Code block (lowlight/hljs) - gray theme for tech feel */
+.prose pre,
+[data-type="codeBlock"] pre,
+.tiptap pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.prose pre code,
+[data-type="codeBlock"] code,
+.tiptap pre code {
+  background: none;
+  padding: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+/* hljs classes from lowlight (prefix hljs-) */
+.hljs-keyword { color: #569cd6; }
+.hljs-string { color: #ce9178; }
+.hljs-number { color: #b5cea8; }
+.hljs-comment { color: #6a9955; }
+.hljs-title { color: #dcdcaa; }
+.hljs-params { color: #9cdcfe; }
+.hljs-attr { color: #9cdcfe; }
+.hljs-built_in { color: #4ec9b0; }
+.hljs-meta { color: #808080; }
+.hljs-doctag { color: #808080; }
+.hljs-section { color: #d7ba7d; }
+.hljs-selector-class { color: #d7ba7d; }
+.hljs-variable { color: #9cdcfe; }
+.hljs-type { color: #4ec9b0; }
+.hljs-function { color: #dcdcaa; }
+.hljs-name { color: #dcdcaa; }
+.hljs-tag { color: #569cd6; }
+.hljs-attribute { color: #9cdcfe; }
+.hljs-regexp { color: #d16969; }
+.hljs-addition { color: #b5cea8; }
+.hljs-deletion { color: #ce9178; }
+.hljs-subst { color: #d4d4d4; }
+.hljs-selector-id { color: #dcdcaa; }
+.hljs-selector-tag { color: #569cd6; }
+.hljs-selector-attr { color: #9cdcfe; }
+.hljs-literal { color: #569cd6; }
+.hljs-symbol { color: #b5cea8; }
+.hljs-bullet { color: #d7ba7d; }
+.hljs-link { color: #9cdcfe; }
+.hljs-quote { color: #6a9955; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: bold; }
