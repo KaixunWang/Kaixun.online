@@ -7,7 +7,8 @@ WORKDIR /app
 
 FROM base AS deps
 COPY package.json package-lock.json* ./
-RUN npm ci
+# react-simple-maps 与 React 19 的 peer 声明冲突，与本地 npm install --legacy-peer-deps 一致
+RUN npm ci --legacy-peer-deps
 
 FROM base AS builder
 WORKDIR /app
