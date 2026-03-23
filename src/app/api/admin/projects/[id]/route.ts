@@ -42,8 +42,9 @@ export async function PATCH(
     album?: string;
     order?: number;
     locationName?: string | null;
-    latitude?: number | null;
-    longitude?: number | null;
+    /** 表单/JSON 可能传数字或字符串 */
+    latitude?: number | string | null;
+    longitude?: number | string | null;
   };
 
   const data: {
