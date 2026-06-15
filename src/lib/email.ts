@@ -1,6 +1,10 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY ?? "");
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
+  return new Resend(apiKey);
+}
 
 export async function sendVerificationEmail(opts: {
   to: string;
@@ -9,8 +13,9 @@ export async function sendVerificationEmail(opts: {
   const { to, verifyUrl } = opts;
 
   const from = process.env.EMAIL_FROM;
+  const resend = getResend();
 
-  if (!process.env.RESEND_API_KEY || !from) {
+  if (!resend || !from) {
     console.warn(
       "[email] Missing RESEND_API_KEY or EMAIL_FROM, skip sending email. Verification URL:",
       verifyUrl,
