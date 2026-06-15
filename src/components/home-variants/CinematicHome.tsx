@@ -356,21 +356,21 @@ function CinematicComments({ ratio, initialComments, currentUserId }: { ratio: n
 
   return (
     <div 
-      className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 font-mono text-zinc-300 pt-24 pb-8"
+      className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 font-mono text-zinc-200 pt-24 pb-8"
       style={{ opacity, transform: `translateY(${transformY}px)` }}
     >
       <div className="mb-6 flex items-center gap-2 text-sm sm:text-base">
-        {PROMPT} <span className="text-zinc-100">tail -f /var/log/guestbook.log</span>
+        {PROMPT} <span className="text-zinc-50">tail -f /var/log/guestbook.log</span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 w-full max-w-6xl flex-1 min-h-0">
         {/* Left: Input Form */}
         <div className="w-full lg:w-80 shrink-0">
-          <div className="rounded-xl border border-zinc-800/60 bg-[#0a0a0a]/80 backdrop-blur-md p-6 shadow-2xl">
-            <h3 className="font-tech text-emerald-400 mb-6 text-lg tracking-widest">TRANSMIT_LOG</h3>
+          <div className="rounded-xl border border-zinc-700/60 bg-zinc-900/60 backdrop-blur-md p-6 shadow-2xl">
+            <h3 className="font-tech text-emerald-300 mb-6 text-lg tracking-widest">TRANSMIT_LOG</h3>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <textarea
-                className="w-full bg-black/50 border border-zinc-800 rounded-lg p-4 text-sm text-zinc-300 placeholder-zinc-700 outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 resize-y min-h-[100px]"
+                className="w-full bg-zinc-950/70 border border-zinc-700 rounded-lg p-4 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 resize-y min-h-[100px]"
                 placeholder={currentUserId ? "Enter payload data..." : "Authentication required to transmit."}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -394,38 +394,38 @@ function CinematicComments({ ratio, initialComments, currentUserId }: { ratio: n
         {/* Right: Comments List - scrollable */}
         <div className="flex-1 min-w-0 flex flex-col gap-4 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 pr-1">
           {comments.length === 0 ? (
-            <div className="p-12 text-center text-zinc-600 rounded-xl border border-zinc-800/30 border-dashed">
+            <div className="p-12 text-center text-zinc-400 rounded-xl border border-zinc-700/40 border-dashed">
               No transmission logs found.
             </div>
           ) : (
             comments.map((c) => (
-              <div key={c.id} className="group flex gap-4 rounded-xl border border-zinc-800/40 bg-zinc-900/20 p-5 transition-all hover:bg-zinc-900/40 hover:border-zinc-700/50 shrink-0">
+              <div key={c.id} className="group flex gap-4 rounded-xl border border-zinc-700/50 bg-zinc-900/50 p-5 transition-all hover:bg-zinc-900/70 hover:border-zinc-600/50 shrink-0">
                 <div className="shrink-0">
-                  <div className="relative h-12 w-12 overflow-hidden rounded bg-black border border-zinc-800 flex items-center justify-center">
+                  <div className="relative h-12 w-12 overflow-hidden rounded bg-zinc-950 border border-zinc-700 flex items-center justify-center">
                     {c.user.image ? (
                       <Image src={c.user.image} alt="" fill className="object-cover" unoptimized={c.user.image.startsWith("http")} />
                     ) : (
-                      <span className="text-zinc-700 text-xs font-tech">USR</span>
+                      <span className="text-zinc-400 text-xs font-tech">USR</span>
                     )}
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-emerald-400 font-bold text-sm truncate">@{displayName(c)}</span>
-                      <span className="text-zinc-600 text-xs px-2 py-0.5 rounded-full bg-zinc-800/30 shrink-0">
+                      <span className="text-emerald-300 font-bold text-sm truncate">@{displayName(c)}</span>
+                      <span className="text-zinc-400 text-xs px-2 py-0.5 rounded-full bg-zinc-800/50 shrink-0">
                         {new Date(c.createdAt).toLocaleDateString()}
                       </span>
                     </div>
                   </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-wrap break-words">
+                  <p className="text-zinc-100 text-sm leading-relaxed whitespace-pre-wrap break-words">
                     {c.content}
                   </p>
                   <div className="mt-4 flex justify-end">
                     <button
                       onClick={() => handleLike(c.id)}
                       disabled={likingId !== null}
-                      className="flex items-center gap-2 text-xs font-medium text-zinc-500 hover:text-emerald-400 transition-colors"
+                      className="flex items-center gap-2 text-xs font-medium text-zinc-400 hover:text-emerald-300 transition-colors"
                     >
                       <span className="tracking-widest">ACK</span>
                       <span className={`px-2 py-0.5 rounded bg-zinc-800/50 ${c.likeCount > 0 ? "text-emerald-400" : ""}`}>
