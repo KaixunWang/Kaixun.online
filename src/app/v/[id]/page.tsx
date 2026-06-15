@@ -29,7 +29,7 @@ export default async function VariantHomePage({ params }: PageProps) {
     where: { published: true },
     orderBy: { createdAt: "desc" },
     take: 50,
-    select: { id: true, title: true, slug: true, createdAt: true },
+    select: { id: true, title: true, slug: true, createdAt: true, categoryId: true },
   });
 
   const postsList: PostListItem[] = posts.map((p) => ({
@@ -37,6 +37,7 @@ export default async function VariantHomePage({ params }: PageProps) {
     title: p.title,
     slug: p.slug,
     createdAt: p.createdAt,
+    categoryId: p.categoryId,
   }));
 
   const Variant = VARIANTS[id];

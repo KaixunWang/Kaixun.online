@@ -6,7 +6,16 @@ import { TechTerminalHome } from "@/components/home-variants/TechTerminalHome";
 export default async function TechTerminalPage() {
   const session = await getServerSession(authOptions);
 
-  let projects: Array<{ id: string; title: string; link: string | null; album: string | null; order: number }> = [];
+  let projects: Array<{
+    id: string;
+    title: string;
+    link: string | null;
+    album: string | null;
+    locationName: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    order: number;
+  }> = [];
   let comments: Array<any> = [];
 
   try {
@@ -21,7 +30,16 @@ export default async function TechTerminalPage() {
         },
       }),
     ]);
-    projects = projectsResult;
+    projects = projectsResult.map((p) => ({
+      id: p.id,
+      title: p.title,
+      link: p.link,
+      album: p.album,
+      locationName: p.locationName ?? null,
+      latitude: p.latitude ?? null,
+      longitude: p.longitude ?? null,
+      order: p.order,
+    }));
     comments = commentsResult.map((c) => ({
       ...c,
       createdAt: c.createdAt.toISOString(),

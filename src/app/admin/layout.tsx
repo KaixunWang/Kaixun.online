@@ -39,6 +39,12 @@ export default async function AdminLayout({
                 Posts
               </Link>
               <Link
+                href="/admin/categories"
+                className="rounded-md px-2 py-1 hover:bg-zinc-100"
+              >
+                Categories
+              </Link>
+              <Link
                 href="/admin/projects"
                 className="rounded-md px-2 py-1 hover:bg-zinc-100"
               >

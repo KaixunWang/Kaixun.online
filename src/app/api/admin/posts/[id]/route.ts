@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
+import {
+  normalizePostContentFormat,
+  validatePostContent,
+} from "@/lib/post-content";
 
 async function requireAdmin() {
   const session = await getServerSession(authOptions);
@@ -49,13 +53,18 @@ export async function PATCH(
 
   const { id } = await context.params;
   const body = await request.json();
-  const { title, slug, content, contentRich, published } = body as {
-    title?: string;
-    slug?: string;
-    content?: string;
-    contentRich?: unknown;
-    published?: boolean;
-  };
+  const { title, slug, content, contentRich, contentFormat, categoryId, published } =
+    body as {
+      title?: string;
+      slug?: string;
+      content?: string;
+      contentRich?: unknown;
+      contentFormat?: string;
+      categoryId?: string | null;
+      published?: boolean;
+    };
+
+  const format = normalizePostContentFormat(contentFormat);
 
   if (!title || !slug || !content) {
     return NextResponse.json(
@@ -78,11 +87,9 @@ export async function PATCH(
     );
   }
 
-  if (content.length > 20000) {
-    return NextResponse.json(
-      { message: "Content is too long (max 20000 characters)." },
-      { status: 400 },
-    );
+  const contentError = validatePostContent(format, content);
+  if (contentError) {
+    return NextResponse.json({ message: contentError }, { status: 400 });
   }
 
   try {
@@ -91,9 +98,11 @@ export async function PATCH(
       data: {
         title,
         slug,
+        contentFormat: format,
         content,
-        contentRich: (contentRich ?? null) as any,
+        contentRich: format === "MARKDOWN" ? null : ((contentRich ?? null) as any),
         published: Boolean(published),
+        categoryId: categoryId || null,
       },
     });
 

@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
+import {
+  normalizePostContentFormat,
+  validatePostContent,
+} from "@/lib/post-content";
 
 async function requireAdmin() {
   const session = await getServerSession(authOptions);
@@ -32,13 +36,18 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { title, slug, content, contentRich, published } = body as {
-    title?: string;
-    slug?: string;
-    content?: string;
-    contentRich?: unknown;
-    published?: boolean;
-  };
+  const { title, slug, content, contentRich, contentFormat, categoryId, published } =
+    body as {
+      title?: string;
+      slug?: string;
+      content?: string;
+      contentRich?: unknown;
+      contentFormat?: string;
+      categoryId?: string | null;
+      published?: boolean;
+    };
+
+  const format = normalizePostContentFormat(contentFormat);
 
   if (!title || !slug || !content) {
     return NextResponse.json(
@@ -61,11 +70,18 @@ export async function POST(request: Request) {
     );
   }
 
-  if (content.length > 20000) {
-    return NextResponse.json(
-      { message: "Content is too long (max 20000 characters)." },
-      { status: 400 },
-    );
+  const contentError = validatePostContent(format, content);
+  if (contentError) {
+    return NextResponse.json({ message: contentError }, { status: 400 });
+  }
+
+  let authorId = (session.user as { id?: string })?.id ?? null;
+  if (authorId) {
+    const author = await prisma.user.findUnique({
+      where: { id: authorId },
+      select: { id: true },
+    });
+    if (!author) authorId = null;
   }
 
   try {
@@ -73,10 +89,12 @@ export async function POST(request: Request) {
       data: {
         title,
         slug,
+        contentFormat: format,
         content,
-        contentRich: (contentRich ?? null) as any,
+        contentRich: format === "MARKDOWN" ? null : ((contentRich ?? null) as any),
         published: Boolean(published),
-        authorId: (session.user as { id?: string })?.id,
+        authorId,
+        categoryId: categoryId || null,
       },
     });
 

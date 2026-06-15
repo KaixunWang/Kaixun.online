@@ -3,12 +3,17 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { RichTextEditor } from "@/app/admin/components/RichTextEditor";
+import { MarkdownEditor } from "@/app/admin/components/MarkdownEditor";
+import { CategorySelect } from "@/app/admin/components/CategorySelect";
+import type { PostContentFormat } from "@/lib/post-content";
 
 interface Post {
   id: string;
   title: string;
   slug: string;
   content: string;
+  contentFormat: PostContentFormat;
+  categoryId: string | null;
   published: boolean;
   contentRich: Record<string, unknown> | null;
 }
@@ -36,7 +41,10 @@ export default function EditPostPage() {
         setError(data.message ?? "Failed to load post.");
         return;
       }
-      setPost(data as Post);
+      setPost({
+        ...(data as Post),
+        contentFormat: data.contentFormat === "MARKDOWN" ? "MARKDOWN" : "RICH",
+      });
     } catch {
       setError("Network error. Please try again later.");
     } finally {
@@ -57,8 +65,11 @@ export default function EditPostPage() {
         body: JSON.stringify({
           title: post.title,
           slug: post.slug,
+          contentFormat: post.contentFormat,
           content: post.content,
-          contentRich: post.contentRich,
+          contentRich:
+            post.contentFormat === "MARKDOWN" ? null : post.contentRich,
+          categoryId: post.categoryId,
           published: post.published,
         }),
       });
@@ -153,14 +164,60 @@ export default function EditPostPage() {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-zinc-700">Content</label>
-          <RichTextEditor
-            initialContentRich={post.contentRich}
-            initialPlainText={post.content}
-            onChange={({ contentRich, plainText }) =>
-              setPost({ ...post, content: plainText, contentRich })
-            }
+          <label className="text-xs font-medium text-zinc-700">Category</label>
+          <CategorySelect
+            value={post.categoryId ?? ""}
+            onChange={(id) => setPost({ ...post, categoryId: id || null })}
           />
+        </div>
+        <div className="space-y-2">
+          <span className="text-xs font-medium text-zinc-700">Content format</span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() =>
+                setPost({ ...post, contentFormat: "RICH", contentRich: null })
+              }
+              className={`rounded-md px-3 py-1.5 text-xs font-medium ${
+                post.contentFormat === "RICH"
+                  ? "bg-zinc-900 text-white"
+                  : "border border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+              }`}
+            >
+              Rich text
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setPost({ ...post, contentFormat: "MARKDOWN", contentRich: null })
+              }
+              className={`rounded-md px-3 py-1.5 text-xs font-medium ${
+                post.contentFormat === "MARKDOWN"
+                  ? "bg-zinc-900 text-white"
+                  : "border border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+              }`}
+            >
+              Markdown
+            </button>
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <label className="text-xs font-medium text-zinc-700">Content</label>
+          {post.contentFormat === "MARKDOWN" ? (
+            <MarkdownEditor
+              value={post.content}
+              onChange={(value) => setPost({ ...post, content: value })}
+            />
+          ) : (
+            <RichTextEditor
+              key={`rich-${post.id}-${post.contentFormat}`}
+              initialContentRich={post.contentRich}
+              initialPlainText={post.content}
+              onChange={({ contentRich, plainText }) =>
+                setPost({ ...post, content: plainText, contentRich })
+              }
+            />
+          )}
         </div>
         <label className="flex items-center gap-2 text-sm text-zinc-700">
           <input
@@ -189,4 +246,3 @@ export default function EditPostPage() {
     </div>
   );
 }
-

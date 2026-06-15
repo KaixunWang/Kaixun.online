@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 export default async function AdminPostsPage() {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: "desc" },
+    include: { category: { select: { name: true } } },
   });
 
   return (
@@ -26,6 +27,7 @@ export default async function AdminPostsPage() {
             <tr>
               <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">Slug</th>
+              <th className="px-4 py-2">Category</th>
               <th className="px-4 py-2">Status</th>
               <th className="px-4 py-2">Created</th>
               <th className="px-4 py-2" />
@@ -35,7 +37,7 @@ export default async function AdminPostsPage() {
             {posts.length === 0 ? (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={6}
                   className="px-4 py-6 text-center text-sm text-zinc-500"
                 >
                   No posts yet.
@@ -46,16 +48,24 @@ export default async function AdminPostsPage() {
                 <tr key={post.id} className="border-t border-zinc-100">
                   <td className="px-4 py-2 text-zinc-900">{post.title}</td>
                   <td className="px-4 py-2 text-zinc-500">{post.slug}</td>
+                  <td className="px-4 py-2 text-zinc-500">
+                    {post.category?.name ?? "—"}
+                  </td>
                   <td className="px-4 py-2">
-                    {post.published ? (
-                      <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
-                        Published
-                      </span>
-                    ) : (
+                    <div className="flex flex-wrap items-center gap-2">
+                      {post.published ? (
+                        <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                          Published
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
+                          Draft
+                        </span>
+                      )}
                       <span className="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
-                        Draft
+                        {post.contentFormat === "MARKDOWN" ? "MD" : "Rich"}
                       </span>
-                    )}
+                    </div>
                   </td>
                   <td className="px-4 py-2 text-xs text-zinc-500">
                     {post.createdAt.toLocaleDateString()}

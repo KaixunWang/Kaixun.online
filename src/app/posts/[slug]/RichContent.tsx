@@ -29,8 +29,8 @@ export function RichContent({
 }: RichContentProps) {
   const baseClass =
     variant === "dark"
-      ? "prose prose-sm max-w-none prose-invert text-zinc-100 leading-relaxed"
-      : "prose prose-sm max-w-none text-zinc-800 leading-relaxed";
+      ? "prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-invert text-zinc-100 leading-relaxed"
+      : "prose prose-sm sm:prose-base lg:prose-lg max-w-none text-zinc-800 leading-relaxed";
 
   const editor = useEditor({
     editable: false,

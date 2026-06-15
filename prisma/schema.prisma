@@ -24,6 +24,11 @@ enum CommentStatus {
   REJECTED
 }
 
+enum PostContentFormat {
+  RICH
+  MARKDOWN
+}
+
 model User {
   id             String    @id @default(cuid())
   email          String    @unique
@@ -64,16 +69,33 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Post {
-  id          String    @id @default(cuid())
-  title       String
-  slug        String    @unique
-  content     String    @db.Text
-  contentRich Json?
-  published   Boolean   @default(false)
+model PostCategory {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  description String?
+  parentId    String?
+  order       Int            @default(0)
+  parent      PostCategory?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children    PostCategory[] @relation("CategoryTree")
+  posts       Post[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
 
-  authorId  String?
-  author    User?     @relation("AuthorPosts", fields: [authorId], references: [id])
+model Post {
+  id            String            @id @default(cuid())
+  title         String
+  slug          String            @unique
+  contentFormat PostContentFormat @default(RICH)
+  content       String            @db.Text
+  contentRich   Json?
+  published     Boolean           @default(false)
+
+  authorId   String?
+  author     User?          @relation("AuthorPosts", fields: [authorId], references: [id])
+  categoryId String?
+  category   PostCategory?  @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 
   comments  Comment[]
 
