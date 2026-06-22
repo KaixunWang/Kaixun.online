@@ -1,0 +1,112 @@
+.vh-locale-float {
+  position: fixed;
+  left: var(--vh-back-top);
+  bottom: 2rem;
+  z-index: 9;
+
+  &.open {
+    .vh-locale-float-trigger {
+      color: var(--vh-white-color);
+      background: var(--vh-main-color);
+      box-shadow: 0 6px 20px rgba(1, 196, 182, 0.45);
+    }
+
+    .vh-locale-float-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+  }
+}
+
+.vh-locale-float-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(1, 196, 182, 0.28);
+  border-radius: 50%;
+  background: var(--vh-white-color);
+  color: var(--vh-main-color);
+  box-shadow: 0 4px 16px rgba(52, 73, 94, 0.12);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(52, 73, 94, 0.18);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  & > svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+}
+
+.vh-locale-float-menu {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.62rem);
+  min-width: 7.5rem;
+  padding: 0.38rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.72rem;
+  background: var(--vh-white-color);
+  box-shadow: 0 8px 28px rgba(52, 73, 94, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem) scale(0.92);
+  transform-origin: left bottom;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    bottom: -0.38rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    background: var(--vh-white-color);
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    transform: rotate(45deg);
+  }
+}
+
+.vh-locale-float-option {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.72rem;
+  border: none;
+  border-radius: 0.48rem;
+  background: transparent;
+  color: var(--vh-font-color);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(1, 196, 182, 0.08);
+  }
+
+  &.active {
+    color: var(--vh-main-color);
+    background: rgba(1, 196, 182, 0.12);
+  }
+}
+
+@media screen and (max-width: 888px) {
+  .vh-locale-float {
+    left: 1rem;
+    bottom: 1.25rem;
+  }
+}

@@ -1,0 +1,55 @@
+export default {
+  Title: 'kaixun.online',
+  Site: 'https://kaixun.online',
+  Author: 'Kaixun',
+  Avatar: '/assets/images/logo.png',
+  Motto: ' I won\'t fail. I swear it.',
+  Cover: '/assets/images/banner/072c12ec85d2d3b5.webp',
+  CreateTime: '2026-06-22',
+  HomeBanner: {
+    enable: true,
+    HomeHeight: '38.88rem',
+    PageHeight: '28.88rem',
+    background: "url('/assets/images/home-banner.webp') no-repeat center 60%/cover",
+  },
+  Theme: {
+    '--vh-main-color': '#01C4B6',
+    '--vh-font-color': '#34495e',
+    '--vh-aside-width': '318px',
+    '--vh-main-radius': '0.88rem',
+    '--vh-main-max-width': '1458px',
+  },
+  Navs: [
+    { i18nKey: 'nav.archives', link: '/archives', icon: 'Nav_archives' },
+    { i18nKey: 'nav.about', link: '/about', icon: 'Nav_about' },
+  ],
+  WebSites: [
+    { text: 'GitHub', link: 'https://github.com/KaixunWang/', icon: 'WebSite_github' },
+    { text: 'Bilibili', link: 'https://space.bilibili.com/356340269', icon: 'bilibili-svgrepo-com' },
+    { text: 'Email', link: 'mailto:12310803@mail.sustech.edu.cn', icon: 'WebSite_email' },
+    { text: 'QQ', link: 'tencent://message/?uin=1114034186&Site=qq&Menu=yes', icon: 'qq-svgrepo-com' },
+  ],
+  AsideShow: {
+    WebSitesShow: true,
+    CategoriesShow: true,
+    TagsShow: true,
+    recommendArticleShow: true,
+  },
+  DNSOptimization: [],
+  vhMusicApi: '',
+  Comment: {
+    Twikoo: { enable: false, envId: '' },
+    Waline: { enable: false, serverURL: '' },
+  },
+  HanAnalytics: { enable: false, server: '', siteId: '' },
+  Reward: {
+    AliPay: '',
+    WeChat: '',
+  },
+  SeoPush: {
+    enable: false,
+    serverApi: '',
+    paramsName: 'url',
+  },
+  ScrollSpeed: 666,
+};

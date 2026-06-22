@@ -1,51 +1,90 @@
-This is the **kaixun.online** personal site: Next.js (App Router) + Prisma + PostgreSQL, with auth (email + GitHub), comments, and an admin dashboard.
+# kaixun.online
 
-## Features
+基于 [vhAstro-Theme](https://github.com/uxiaohan/vhAstro-Theme) 的个人博客，部署在 **Vercel** 静态托管。
 
-- **Auth**: Email/password sign up and sign in; GitHub OAuth (optional).
-- **Account linking**: If you already have an account with the same email and later sign in with GitHub, the GitHub account is linked to that user automatically.
-- **Posts**: Home lists published posts; each post has a detail page with comments.
-- **Admin** (`/admin`): Manage posts and comments (admin role required).
+旧 Next.js 全栈版本已归档至 [`archive/nextjs-site/`](archive/nextjs-site/)。大陆 ECS + Nginx 方案见 [`nginx/`](nginx/) 与 [`scripts/deploy.sh`](scripts/deploy.sh)（需 ICP 备案）。
 
-## GitHub OAuth
+**上线前请阅读** [`PERSONALIZE.md`](PERSONALIZE.md) — 列出所有需改成你自己信息的位置。
 
-1. In [GitHub Developer Settings](https://github.com/settings/developers), create an OAuth App.
-2. Set **Authorization callback URL** to:
-   - Local: `http://localhost:3000/api/auth/callback/github`
-   - Production: `https://kaixun.online/api/auth/callback/github`
-3. Put `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in `.env`.
-
-## Getting Started
-
-First, run the development server:
+## 本地开发
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+浏览器打开 [http://localhost:4321](http://localhost:4321)。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 站点配置
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+编辑 [`src/config.ts`](src/config.ts)：站点名、导航链接、头像、主题色等。UI 文案（副标题、公告、导航文字等）在 [`src/i18n/zh.ts`](src/i18n/zh.ts) / [`src/i18n/en.ts`](src/i18n/en.ts)。
 
-## Learn More
+## 语言切换
 
-To learn more about Next.js, take a look at the following resources:
+Header 左下角 **地球浮球** 点击展开下拉，选择中文 / English 切换界面语言（博客正文不切换）。偏好保存在浏览器本地，Swup 无刷新跳转后仍生效。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 写文章
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run newpost "文章标题"
+```
 
-## Deploy on Vercel
+文章生成在 `src/content/blog/年/月/文章标题.md`。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+格式模板见 [`_templates/vhAstro-theme/post-template.md`](_templates/vhAstro-theme/post-template.md)；theme 自带 8 篇示例在 [`_templates/vhAstro-theme/posts/`](_templates/vhAstro-theme/posts/)（不参与构建）。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 构建与部署（Vercel）
+
+### 首次接入
+
+1. 将仓库 push 到 GitHub
+2. 打开 [Vercel](https://vercel.com) → **Add New Project** → 导入该仓库
+3. 框架会自动识别为 **Astro**（已含根目录 [`vercel.json`](vercel.json)）
+4. 直接 **Deploy**（Build：`npm run build`，Output：`dist`）
+
+### 绑定域名
+
+在 Vercel 项目 **Settings → Domains** 添加 `kaixun.online` 与 `www.kaixun.online`，按 Vercel 提示改 DNS：
+
+| 主机记录 | 类型 | 记录值（以 Vercel 面板为准） |
+|---------|------|------------------------------|
+| `@` | A | `76.76.21.21` |
+| `www` | CNAME | `cname.vercel-dns.com` |
+
+在阿里云解析里删掉指向 ECS `47.92.78.150` 的旧 A 记录，改为上表。生效后自动 HTTPS，无需备案。
+
+### 日常更新
+
+推送到 GitHub 默认分支后 Vercel 会自动构建；本地也可：
+
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+### 可选：大陆 ECS 部署（需备案）
+
+```bash
+npm run build
+./scripts/deploy.sh
+```
+
+## 目录结构
+
+```
+├── archive/nextjs-site/       # 旧 Next.js 备份
+├── _templates/vhAstro-theme/  # 示例文章与 post 模板
+├── PERSONALIZE.md             # 个性化修改清单
+├── src/
+│   ├── config.ts              # 站点配置（必改）
+│   ├── i18n/                  # 中英 UI 文案
+│   └── content/blog/          # 博客文章 Markdown
+├── vercel.json                # Vercel 构建配置
+├── nginx/nginx.conf           # 可选：ECS Nginx（需备案）
+└── scripts/deploy.sh          # 可选：ECS rsync 部署
+```
+
+## Theme 文档
+
+- 在线演示：https://www.vvhan.com
+- Theme 仓库：https://github.com/uxiaohan/vhAstro-Theme

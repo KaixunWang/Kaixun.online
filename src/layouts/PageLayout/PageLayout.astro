@@ -1,0 +1,30 @@
+---
+const { frontmatter } = Astro.props;
+import SITE_CONFIG from "@/config";
+const { Title } = SITE_CONFIG;
+import { defaultSite } from "@/i18n";
+const pageKey = frontmatter.type || "about";
+const docTitleKey = pageKey === "notFound" ? "pages.notFound.title" : `pages.${pageKey}.h1`;
+// 公共 Layout
+import Layout from "@/layouts/Layout/Layout.astro";
+// 评论组件
+import { checkComment } from "@/scripts/Comment";
+import Comment from "@/components/Comment/Comment.astro";
+// 关于样式
+import "@/styles/About.less";
+// 文章内容基础样式
+import "@/styles/ArticleBase.less";
+// PageLayout 样式
+import "./PageLayout.less";
+---
+
+<Layout title={frontmatter.title || Title} description={defaultSite.description} activeNav={frontmatter.type || "-"} documentTitleKey={docTitleKey}>
+	<section class="vh-page vh-about vh-animation vh-animation-init">
+		<header class="vh-page-header">
+			<h1 data-i18n={`pages.${pageKey}.h1`}>{frontmatter.h1}</h1>
+			{frontmatter.desc && <p data-i18n={`pages.${pageKey}.desc`}>{frontmatter.desc}</p>}
+		</header>
+		<main><slot /></main>
+		{checkComment() && frontmatter.comment != false && <Comment />}
+	</section>
+</Layout>

@@ -1,0 +1,16 @@
+---
+import { getArchiveList } from "@/utils/getArchive";
+// 获取归档列表
+const articleList = await getArchiveList();
+import { defaultSite } from "@/i18n";
+// 公共 Layout
+import Layout from "@/layouts/Layout/Layout.astro";
+// 文章列表组件
+import Archive from "@/components/Archive/Archive.astro";
+---
+
+<Layout title="归档" description={defaultSite.description} activeNav="archives" documentTitleKey="pages.archives">
+	<section class="vh-container">
+		<Archive articleList={articleList} />
+	</section>
+</Layout>
