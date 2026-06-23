@@ -9,7 +9,7 @@ export async function getStaticPaths(options: GetStaticPathsOptions) {
 	// 置顶文章功能
 	moveTopToFirst(posts);
 	// 生成 Search JSON 文件
-	await setSearchJson(posts);
+	await setSearchJson(posts.filter(i => !i.data.hide));
 	// 隐藏的文章不显示
 	return paginate(
 		posts.filter(i => !i.data.hide),

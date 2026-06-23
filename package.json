@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "newpost": "node ./script/newpost.js",
+    "gen-top150": "node ./script/gen-top150-posts.js",
     "offdev": "astro preferences disable devToolbar",
     "ondev": "astro preferences enable devToolbar"
   },
