@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '哈希表']
 id: "top150-05-hashmap"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/05-hashmap.svg"
 hide: true
 recommend: false
 top: false

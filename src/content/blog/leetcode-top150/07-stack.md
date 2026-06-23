@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '栈']
 id: "top150-07-stack"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/07-stack.svg"
 hide: true
 recommend: false
 top: false

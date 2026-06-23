@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '动态规划', '多维DP']
 id: "top150-23-multidimensional-dp"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/23-multidimensional-dp.svg"
 hide: true
 recommend: false
 top: false

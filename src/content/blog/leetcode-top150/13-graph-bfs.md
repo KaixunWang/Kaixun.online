@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '图', 'BFS']
 id: "top150-13-graph-bfs"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/13-graph-bfs.svg"
 hide: true
 recommend: false
 top: false

@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '链表']
 id: "top150-08-linked-list"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/08-linked-list.svg"
 hide: true
 recommend: false
 top: false

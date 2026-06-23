@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '矩阵']
 id: "top150-04-matrix"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/04-matrix.svg"
 hide: true
 recommend: false
 top: false

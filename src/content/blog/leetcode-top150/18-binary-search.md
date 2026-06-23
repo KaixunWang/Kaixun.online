@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '二分查找']
 id: "top150-18-binary-search"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/18-binary-search.svg"
 hide: true
 recommend: false
 top: false

@@ -4,7 +4,7 @@ export default {
   Author: 'Kaixun',
   Avatar: '/assets/images/logo.png',
   Motto: ' I won\'t fail. I swear it.',
-  Cover: '/assets/images/banner/072c12ec85d2d3b5.webp',
+  Cover: '/assets/images/covers/default.svg',
   CreateTime: '2026-06-22',
   HomeBanner: {
     enable: true,

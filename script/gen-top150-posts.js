@@ -8,7 +8,10 @@ const __dirname = path.dirname(__filename);
 const OUT_DIR = path.join(__dirname, '../src/content/blog/leetcode-top150');
 const SERIES_DATE = '2026-06-22 12:00:00';
 
-const SECTION_RE = /^## (\d+)\. .+$/m;
+const isBannerCover = (cover) => typeof cover === 'string' && cover.includes('/assets/images/banner/');
+const top150Cover = (file) => `/assets/images/covers/top150/${file}.svg`;
+const keepOrDefaultCover = (existingCover, defaultCover) =>
+  existingCover && !isBannerCover(existingCover) ? existingCover : defaultCover;
 
 function problemSectionHeader(problem) {
   return `## ${problem.num}. ${problem.titleZh}`;
@@ -87,6 +90,7 @@ function parseFrontmatter(content) {
 
 function renderModuleFrontmatter(mod, existing = {}) {
   const hide = existing.hide !== undefined ? existing.hide : true;
+  const cover = keepOrDefaultCover(existing.cover, top150Cover(mod.file));
   const lines = [
     '---',
     `title: "Top 150 · ${mod.titleShort}（${mod.problems.length} 题）"`,
@@ -94,6 +98,7 @@ function renderModuleFrontmatter(mod, existing = {}) {
     `tags: [${mod.tags.map((t) => `'${t}'`).join(', ')}]`,
     `id: "${mod.postId}"`,
     `date: ${existing.date || SERIES_DATE}`,
+    `cover: "${cover}"`,
   ];
   if (existing.updated) lines.push(`updated: ${existing.updated}`);
   lines.push(`hide: ${hide}`);
@@ -124,7 +129,9 @@ ${mod.summary}
   return `${renderModuleFrontmatter(mod, existingFm)}\n\n${intro}${problemBlocks.join('\n')}`;
 }
 
-function renderIndexPost() {
+function renderIndexPost(existingContent = null) {
+  const existingFm = existingContent ? parseFrontmatter(existingContent) : {};
+  const cover = keepOrDefaultCover(existingFm.cover, top150Cover('index'));
   const rows = modules
     .map(
       (m) =>
@@ -138,6 +145,7 @@ categories: LeetCode
 tags: ['Top150', 'LeetCode', '面试']
 id: "top150-index"
 date: ${SERIES_DATE}
+cover: "${cover}"
 hide: false
 recommend: true
 top: true
@@ -185,7 +193,13 @@ async function main() {
   let written = 0;
 
   const indexPath = path.join(OUT_DIR, '00-index.md');
-  if (await writeFileIfChanged(indexPath, renderIndexPost())) written++;
+  let existingIndex = '';
+  try {
+    existingIndex = await fs.readFile(indexPath, 'utf8');
+  } catch {
+    // new index post
+  }
+  if (await writeFileIfChanged(indexPath, renderIndexPost(existingIndex || null))) written++;
 
   for (const mod of modules) {
     const filePath = path.join(OUT_DIR, `${mod.file}.md`);

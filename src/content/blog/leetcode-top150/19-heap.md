@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '堆']
 id: "top150-19-heap"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/19-heap.svg"
 hide: true
 recommend: false
 top: false

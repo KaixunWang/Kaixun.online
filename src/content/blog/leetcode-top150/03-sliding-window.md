@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '滑动窗口']
 id: "top150-03-sliding-window"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/03-sliding-window.svg"
 hide: true
 recommend: false
 top: false

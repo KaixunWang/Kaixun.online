@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '分治']
 id: "top150-16-divide-and-conquer"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/16-divide-and-conquer.svg"
 hide: false
 recommend: false
 top: false
@@ -302,4 +303,3 @@ class Solution {
 ### 备注
 
 ---
-

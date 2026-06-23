@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', 'LeetCode', '面试']
 id: "top150-index"
 date: 2026-06-22 12:00:00
+cover: "/assets/images/covers/top150/index.svg"
 hide: false
 recommend: true
 top: true
