@@ -1,5 +1,6 @@
 ---
-import { getDescription, fmtTime } from "@/utils/index";
+import { getDescription, fmtTime, getPostDate } from "@/utils/index";
+import { toDatetimeAttr } from "@/utils/formatDate";
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
 export async function getStaticPaths() {
@@ -8,6 +9,7 @@ export async function getStaticPaths() {
 }
 // 处理文章内容
 const post: any = Astro.props;
+const displayDate = getPostDate(post.data);
 // 获取封面图
 import getCover, { resolveCoverUrl } from "@/utils/getCover";
 const ARTICLE_COVER: string = resolveCoverUrl(post.data.cover);
@@ -49,7 +51,7 @@ import "@/styles/ArticleBase.less";
 			<div class="article-meta">
 				<span class="article-meta-item">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 12h3.5"></path><path d="M12 7v5"></path></svg>
-					<time>{fmtTime(post.data.date, "YYYY-MM-DD A")}</time>
+					<time datetime={toDatetimeAttr(displayDate)} data-i18n-date="YYYY-MM-DD A">{fmtTime(displayDate, "YYYY-MM-DD A")}</time>
 					<span class="count">
 						{
 							article_word_count ? (
@@ -93,7 +95,7 @@ import "@/styles/ArticleBase.less";
 			<!-- 打赏组件 -->
 			<Reward />
 			<!-- 版权©️信息 -->
-			<Copyright site={Site} id={post.data.id} title={post.data.title} sitename={Title} time={fmtTime(post.data.date, "YYYY-MM-DD A")} auther={Author} />
+			<Copyright site={Site} id={post.data.id} title={post.data.title} sitename={Title} time={fmtTime(displayDate, "YYYY-MM-DD A")} timeIso={toDatetimeAttr(displayDate)} auther={Author} />
 		</footer>
 		{checkComment() && <Comment />}
 	</article>

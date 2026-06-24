@@ -4,6 +4,7 @@ import {
   translate,
   type Locale,
 } from '@/i18n';
+import { formatDate } from '@/utils/formatDate';
 
 const STORAGE_KEY = 'kaixun-locale';
 
@@ -134,12 +135,23 @@ export function applyLocale(root: ParentNode = document): void {
     el.setAttribute('title', t(key, numericVars));
   });
 
+  root.querySelectorAll('time[data-i18n-date]').forEach((el) => {
+    const iso = el.getAttribute('datetime');
+    const fmt = el.getAttribute('data-i18n-date') || 'MMMM D, YYYY';
+    if (!iso) return;
+    el.textContent = formatDate(iso, currentLocale, fmt);
+  });
+
   root.querySelectorAll('[data-i18n-template]').forEach((el) => {
     const key = el.getAttribute('data-i18n-template');
     if (!key) return;
     const vars = readTemplateVars(el);
+    if (vars.timeIso) {
+      vars.time = formatDate(vars.timeIso, currentLocale, 'YYYY-MM-DD A');
+    }
     const numericVars: Record<string, string | number> = {};
     for (const [k, v] of Object.entries(vars)) {
+      if (k === 'timeIso') continue;
       numericVars[k] = /^\d+$/.test(v) ? Number(v) : v;
     }
     const text = t(key, numericVars);

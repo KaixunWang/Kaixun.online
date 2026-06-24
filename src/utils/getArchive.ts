@@ -1,14 +1,17 @@
 
 import { getCollection } from "astro:content";
+import { getPostDate } from "@/utils/index";
+
+const sortByPostDate = (a: any, b: any) => getPostDate(b.data).valueOf() - getPostDate(a.data).valueOf();
 
 // 格式化文章列表
 const fmtArticleList = (articleList: any) => {
   // 按年份分类
   const groupedByYear = articleList.reduce((acc: any, item: any) => {
-    const year = item.data.date.getFullYear();
+    const year = getPostDate(item.data).getFullYear();
     // 初始化
     !acc[year] && (acc[year] = []);
-    acc[year].push(item.data);
+    acc[year].push({ ...item.data, date: getPostDate(item.data) });
     return acc;
   }, {});
   // 转换为目标格式
@@ -18,21 +21,21 @@ const fmtArticleList = (articleList: any) => {
 // 获取分类下的文章列表
 const getCategoriesList = async (categories: string) => {
   const posts = await getCollection("blog");
-  const articleList = posts.filter((i: any) => i.data.categories == categories && !i.data.hide).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());;
+  const articleList = posts.filter((i: any) => i.data.categories == categories && !i.data.hide).sort(sortByPostDate);
   return fmtArticleList(articleList);
 }
 
 // 获取标签下的文章列表
 const getTagsList = async (tags: string) => {
   const posts = await getCollection("blog");
-  const articleList = posts.filter((i: any) => !i.data.hide && (i.data.tags || []).map((_i: any) => (String(_i))).includes(tags)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const articleList = posts.filter((i: any) => !i.data.hide && (i.data.tags || []).map((_i: any) => (String(_i))).includes(tags)).sort(sortByPostDate);
   return fmtArticleList(articleList);
 }
 
 // 获取归档列表
 const getArchiveList = async () => {
   const posts = await getCollection("blog");
-  const articleList = posts.filter((i: any) => !i.data.hide).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());;
+  const articleList = posts.filter((i: any) => !i.data.hide).sort(sortByPostDate);
   return fmtArticleList(articleList);
 }
 

@@ -1,5 +1,6 @@
 ---
 import { fmtTime } from "@/utils/index";
+import { toDatetimeAttr } from "@/utils/formatDate";
 const { articleList } = Astro.props;
 // 文章页面样式
 import "./Archive.less";
@@ -17,7 +18,7 @@ import "./Archive.less";
 					</p>
 					{i.data.map((_: any) => (
 						<a href={`/article/${_.id}`}>
-							<em>{fmtTime(_.date, "MM-DD")}</em>
+							<em><time datetime={toDatetimeAttr(_.date)} data-i18n-date="MM-DD">{fmtTime(_.date, "MM-DD")}</time></em>
 							<i />
 							<span class="vh-ellipsis">{_.title}</span>
 							<cite class="vh-ellipsis">{_.tags.map((tag: string) => `#${tag}`).join(" ")}</cite>

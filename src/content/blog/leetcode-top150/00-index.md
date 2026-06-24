@@ -35,7 +35,7 @@ top: true
 | 15  | 回溯        | 7   | [阅读](/article/top150-15-backtracking)        | ⬜   |
 | 16  | 分治        | 4   | [阅读](/article/top150-16-divide-and-conquer)  | ✅   |
 | 17  | Kadane 算法 | 2   | [阅读](/article/top150-17-kadane)              | ✅   |
-| 18  | 二分查找      | 7   | [阅读](/article/top150-18-binary-search)       | ⬜   |
+| 18  | 二分查找      | 7   | [阅读](/article/top150-18-binary-search)       | ✅   |
 | 19  | 堆         | 4   | [阅读](/article/top150-19-heap)                | ✅   |
 | 20  | 位运算       | 6   | [阅读](/article/top150-20-bit-manipulation)    | ⬜   |
 | 21  | 数学        | 6   | [阅读](/article/top150-21-math)                | ⬜   |

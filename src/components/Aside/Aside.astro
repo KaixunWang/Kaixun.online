@@ -4,6 +4,7 @@
 import Svg from "@/components/Svg/Svg.astro";
 // 时间处理
 import { fmtTime } from "@/utils/index";
+import { toDatetimeAttr } from "@/utils/formatDate";
 // 获取用户配置数据
 import SITE_CONFIG from "@/config";
 const { Avatar, Author, Motto, WebSites, AsideShow } = SITE_CONFIG;
@@ -118,7 +119,7 @@ import "./Aside.less";
 									{idx < 3 ? <i>{idx + 1}</i> : <em>{idx + 1}.</em>}
 									<cite class="vh-ellipsis">{i.title}</cite>
 								</span>
-								<time>{fmtTime(i.date, "YYYY-MM-DD A")}</time>
+								<time datetime={toDatetimeAttr(i.date)} data-i18n-date="YYYY-MM-DD A">{fmtTime(i.date, "YYYY-MM-DD A")}</time>
 							</a>
 						))}
 					</div>

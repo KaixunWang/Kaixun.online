@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '二分查找']
 id: "top150-18-binary-search"
 date: 2026-06-22 12:00:00
+updated: 2026-06-25 03:30:49
 cover: "/assets/images/covers/top150/18-binary-search.svg"
 hide: false
 recommend: false
@@ -50,7 +51,7 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O(\logn)$
+- 时间：$O(\log n)$
 - 空间：$O(1)$
 
 ### 备注

@@ -1,12 +1,12 @@
 ---
-const { time, sitename, title, site, id, auther } = Astro.props;
+const { time, timeIso, sitename, title, site, id, auther } = Astro.props;
 const articleURL = `${site}/article/${id}`;
 import "./Copyright.less";
 ---
 
 <section class="vh-copyright">
 	<p>
-		<span data-i18n-template="copyright.published" data-i18n-author={auther} data-i18n-time={time}>
+		<span data-i18n-template="copyright.published" data-i18n-author={auther} data-i18n-time={time} data-i18n-time-iso={timeIso}>
 			本文由 {auther} 于 {time} 发布
 		</span>
 	</p>

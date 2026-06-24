@@ -1,15 +1,15 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
+import { formatDate } from "@/utils/formatDate";
 dayjs.extend(utc);
 dayjs.extend(timezone);
-// 设置中文语言环境
-import 'dayjs/locale/zh-cn'
-dayjs.locale('zh-cn');
 // 获取文章的描述
 const getDescription = (post: any, num: number = 150) => (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num) || '暂无简介'
-//处理时间
-const fmtTime = (time: any, fmt: string = 'MMMM D, YYYY') => dayjs(time).utc().format(fmt)
+// 卡片/列表展示与排序用：优先 updated，否则 date
+const getPostDate = (data: { date: Date; updated?: Date }) => data.updated ?? data.date
+// 构建时默认中文；英文由客户端 data-i18n-date 重渲染
+const fmtTime = (time: any, fmt: string = 'MMMM D, YYYY') => formatDate(time, 'zh', fmt)
 // 处理日期
 const fmtDate = (time: string | Date, hours_status = true) => {
   const now = dayjs();
@@ -99,4 +99,4 @@ const $POST = async (url: string, data: Record<string, any>, headers: Record<str
 
 
 
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle }
+export { $GET, $POST, getDescription, getPostDate, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle }

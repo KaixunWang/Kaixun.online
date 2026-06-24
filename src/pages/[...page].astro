@@ -3,9 +3,10 @@ import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
 import setSearchJson from "@/utils/vhSearch";
 import moveTopToFirst from "@/utils/moveTopToFirst";
+import { getPostDate } from "@/utils/index";
 export async function getStaticPaths(options: GetStaticPathsOptions) {
 	const { paginate } = options;
-	const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+	const posts = (await getCollection("blog")).sort((a, b) => getPostDate(b.data).valueOf() - getPostDate(a.data).valueOf());
 	// 置顶文章功能
 	moveTopToFirst(posts);
 	// 生成 Search JSON 文件

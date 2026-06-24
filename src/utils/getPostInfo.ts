@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
-const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+import { getPostDate } from "@/utils/index";
+const posts = (await getCollection("blog")).sort((a, b) => getPostDate(b.data).valueOf() - getPostDate(a.data).valueOf());
 // 获取文章分类
 const getCategories = () => {
   const categoriesList = posts.reduce((acc: any, i: any) => {
@@ -28,7 +29,7 @@ const getTags = () => {
 // 获取推荐文章 (给文章添加 recommend: true 字段)
 const getRecommendArticles = () => {
   const recommendList = posts.filter(i => i.data.recommend);
-  return (recommendList.length ? recommendList : posts.slice(0, 6)).map(i => ({ title: i.data.title, date: i.data.date, id: i.data.id }))
+  return (recommendList.length ? recommendList : posts.slice(0, 6)).map(i => ({ title: i.data.title, date: getPostDate(i.data), id: i.data.id }))
 };
 
 // 获取上一篇下一篇文章

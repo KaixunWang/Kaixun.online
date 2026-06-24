@@ -9,6 +9,7 @@
     "astro": "astro",
     "newpost": "node ./script/newpost.js",
     "gen-top150": "node ./script/gen-top150-posts.js",
+    "sync-updated": "node ./script/sync-updated.js",
     "offdev": "astro preferences disable devToolbar",
     "ondev": "astro preferences enable devToolbar"
   },

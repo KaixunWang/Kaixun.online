@@ -4,6 +4,7 @@ categories: LeetCode
 tags: ['Top150', '数学']
 id: "top150-21-math"
 date: 2026-06-22 12:00:00
+updated: 2026-06-25 03:30:49
 cover: "/assets/images/covers/top150/21-math.svg"
 hide: true
 recommend: false
@@ -24,18 +25,30 @@ top: false
 
 ### 思路
 
-<!-- 待填 -->
+反转数字要么和原本的一样（偶数），要么差了*10（奇数）
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x< 0 || x % 10 == 0 && x!=0){
+            return false;
+        }
+        int reverse =0;
+        while(x > reverse){
+            reverse = reverse*10 + x%10;
+            x = x/10;
+        }
+        return x == reverse || x==reverse/10;
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(\log n)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -51,18 +64,35 @@ top: false
 
 ### 思路
 
-<!-- 待填 -->
+从右往左找第一个不是9的数，找到了就+1返回
+
+找不到就新建一个1000....000的返回
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int n = digits.length;
+        for (int i = n - 1; i >= 0; i--) {
+            if (digits[i] < 9) {
+                digits[i]++;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+
+        int[] ans = new int[n + 1];
+        ans[0] = 1;
+        return ans;
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -78,18 +108,30 @@ top: false
 
 ### 思路
 
-<!-- 待填 -->
+末尾的0从哪来？10 = 2 × 5，所以每有一对(2,5)就多一个0
+
+2比5多得多，所以只需要数5的个数
+
+25会多贡献1，125会多贡献2....依此类推
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int trailingZeroes(int n) {
+        int ans = 0;
+        for(int i = 5; i <= n; i *= 5) {
+            ans += n / i;
+        }
+        return ans;
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(\log n)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -105,18 +147,35 @@ top: false
 
 ### 思路
 
-<!-- 待填 -->
+从2二分查找到$\frac{x}{2}$
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int mySqrt(int x) {
+        if (x < 2) return x;
+        int left = 2, right = x / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            long square = (long) mid * mid;
+            if (square == x) {
+                return mid;
+            } else if (square < x) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(\log x)$
+- 空间：$O(1)$
 
 ### 备注
 
