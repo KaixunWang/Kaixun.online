@@ -1,6 +1,5 @@
 ---
-
-## title: "LeetCode 面试经典 150 题 · 学习索引"
+title: "LeetCode 面试经典 150 题 · 学习索引"
 categories: LeetCode
 tags: ['Top150', 'LeetCode', '面试']
 id: "top150-index"
@@ -9,13 +8,13 @@ cover: "/assets/images/covers/top150/index.svg"
 hide: false
 recommend: true
 top: true
+---
 
 :::note{type="info"}
 本系列按 [LeetCode 面试经典 150 题](https://leetcode.cn/studyplan/top-interview-150/) 官方模块划分，共 **23** 个模块、**150** 道题。每模块一篇博客，内含 Java 解法与中文笔记。
 :::
----
-## 模块进度
 
+## 模块进度
 
 | #   | 模块        | 题数  | 文章                                           | 状态  |
 | --- | --------- | --- | -------------------------------------------- | --- |
@@ -43,10 +42,8 @@ top: true
 | 22  | 一维动态规划    | 5   | [阅读](/article/top150-22-1d-dp)               | ⬜   |
 | 23  | 多维动态规划    | 9   | [阅读](/article/top150-23-multidimensional-dp) | ⬜   |
 
-
 ## 刷题建议
 
 1. 按上表顺序逐模块推进，与力扣学习计划保持一致。
 2. 每完成一模块，在对应 md 中填写思路与 Java 代码，再将 `hide: false`。
 3. 完成某模块后，将表中对应行的 `⬜` 改为 `✅`。
-
