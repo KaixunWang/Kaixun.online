@@ -354,7 +354,7 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O(log(min(m,n)))$
+- 时间：$O(\log(\min(m,n)))$
 - 空间：$O(1)$
 
 ### 备注
