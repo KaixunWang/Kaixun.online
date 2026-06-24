@@ -129,14 +129,31 @@ ${mod.summary}
   return `${renderModuleFrontmatter(mod, existingFm)}\n\n${intro}${problemBlocks.join('\n')}`;
 }
 
+function parseIndexProgress(content) {
+  const done = new Set();
+  if (!content) return done;
+  const body = content.replace(/^---[\s\S]*?---\n/, '');
+  for (const line of body.split('\n')) {
+    const taskMatch = line.match(/^- \[([ xX])\] \*\*(\d{2}) ·/);
+    if (taskMatch && (taskMatch[1] === 'x' || taskMatch[1] === 'X')) {
+      done.add(taskMatch[2]);
+      continue;
+    }
+    const tableMatch = line.match(/^\| (\d{2}) \|.+?\| (?:✅|\[x\]|已完成|- \[x\]) \|?\s*$/i);
+    if (tableMatch) done.add(tableMatch[1]);
+  }
+  return done;
+}
+
 function renderIndexPost(existingContent = null) {
   const existingFm = existingContent ? parseFrontmatter(existingContent) : {};
   const cover = keepOrDefaultCover(existingFm.cover, top150Cover('index'));
+  const done = parseIndexProgress(existingContent);
   const rows = modules
-    .map(
-      (m) =>
-        `| ${m.id} | ${m.title} | ${m.problems.length} | [/article/${m.postId}](/article/${m.postId}) | - [ ] |`,
-    )
+    .map((m) => {
+      const status = done.has(m.id) ? '✅' : '⬜';
+      return `| ${m.id} | ${m.title} | ${m.problems.length} | [阅读](/article/${m.postId}) | ${status} |`;
+    })
     .join('\n');
 
   return `---
@@ -153,13 +170,11 @@ top: true
 
 :::note{type="info"}
 本系列按 [LeetCode 面试经典 150 题](${PLAN_URL}) 官方模块划分，共 **${modules.length}** 个模块、**${totalProblems}** 道题。每模块一篇博客，内含 Java 解法与中文笔记。
-
-模块文章默认 \`hide: true\`，完成一个模块后将对应 md 的 \`hide\` 改为 \`false\` 并推送即可发布。
 :::
 
 ## 模块进度
 
-| # | 模块 | 题数 | 文章 | 完成 |
+| # | 模块 | 题数 | 文章 | 状态 |
 |---|------|------|------|------|
 ${rows}
 
@@ -167,7 +182,7 @@ ${rows}
 
 1. 按上表顺序逐模块推进，与力扣学习计划保持一致。
 2. 每完成一模块，在对应 md 中填写思路与 Java 代码，再将 \`hide: false\`。
-3. 在本表「完成」列勾选 \`- [x]\`，便于追踪整体进度。
+3. 完成某模块后，将表中对应行的 \`⬜\` 改为 \`✅\`。
 `;
 }
 
