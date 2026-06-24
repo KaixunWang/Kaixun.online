@@ -5,7 +5,7 @@ tags: ['Top150', '二分查找']
 id: "top150-18-binary-search"
 date: 2026-06-22 12:00:00
 cover: "/assets/images/covers/top150/18-binary-search.svg"
-hide: true
+hide: false
 recommend: false
 top: false
 ---
@@ -24,18 +24,34 @@ top: false
 
 ### 思路
 
-<!-- 待填 -->
+二分模板
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0, right = n - 1, ans = n;
+        while (left <= right) {
+            int mid = ((right - left) >> 1) + left;
+            if (target <= nums[mid]) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
+
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(\logn)$
+- 空间：$O(1)$
 
 ### 备注
 
