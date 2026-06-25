@@ -6,7 +6,7 @@ id: "top150-21-math"
 date: 2026-06-22 12:00:00
 updated: 2026-06-25 03:30:49
 cover: "/assets/images/covers/top150/21-math.svg"
-hide: true
+hide: false
 recommend: false
 top: false
 ---
@@ -191,18 +191,36 @@ class Solution {
 
 ### 思路
 
-<!-- 待填 -->
+二分递归快速幂
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public double myPow(double x, int n) {
+        long N = n;
+        if (N < 0) {
+            return 1.0 / quickPow(x, -N);
+        } else {
+            return quickPow(x, N);
+        }
+    }
+    double quickPow(double x, long n) {
+        if (n == 0) return 1;
+        double half = quickPow(x, n/2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(\log n)$
+- 空间：$O(\log n)$
 
 ### 备注
 
@@ -218,18 +236,52 @@ class Solution {
 
 ### 思路
 
-<!-- 待填 -->
+每个点一个哈希表存斜率，最大斜率count是最大共线点数
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int maxPoints(int[][] points) {
+        int n = points.length;
+        if (n <= 2) return n;
+        int ans = 0;
+        
+        for (int i = 0; i < n; i++) {
+            Map<String, Integer> map = new HashMap<>();
+            for (int j = i + 1; j < n; j++) {
+                int dy = points[j][1] - points[i][1];
+                int dx = points[j][0] - points[i][0];
+                int g = gcd(Math.abs(dy), Math.abs(dx));
+                dy /= g;
+                dx /= g;
+                if (dx < 0) { dy = -dy; dx = -dx; }
+                if (dx == 0) {
+                    dy = 1;
+                } else {
+                    if (dx < 0) { dy = -dy; dx = -dx; }
+                }
+                String key = dy + "," + dx;
+                map.put(key, map.getOrDefault(key, 0) + 1);
+                
+            }
+            for (int cnt : map.values()) {
+                ans = Math.max(ans, cnt + 1);
+            }
+        }
+        return ans;
+    }
+    
+    int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n^2\log (maxVal))$
+- 空间：$O(n)$
 
 ### 备注
 

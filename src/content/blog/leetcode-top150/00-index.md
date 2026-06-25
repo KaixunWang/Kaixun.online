@@ -38,7 +38,7 @@ top: true
 | 18  | 二分查找      | 7   | [阅读](/article/top150-18-binary-search)       | ✅   |
 | 19  | 堆         | 4   | [阅读](/article/top150-19-heap)                | ✅   |
 | 20  | 位运算       | 6   | [阅读](/article/top150-20-bit-manipulation)    | ⬜   |
-| 21  | 数学        | 6   | [阅读](/article/top150-21-math)                | ⬜   |
-| 22  | 一维动态规划    | 5   | [阅读](/article/top150-22-1d-dp)               | ⬜   |
+| 21  | 数学        | 6   | [阅读](/article/top150-21-math)                | ✅   |
+| 22  | 一维动态规划    | 5   | [阅读](/article/top150-22-1d-dp)               | ✅   |
 | 23  | 多维动态规划    | 9   | [阅读](/article/top150-23-multidimensional-dp) | ⬜   |
 
