@@ -40,5 +40,5 @@ top: true
 | 20  | 位运算       | 6   | [阅读](/article/top150-20-bit-manipulation)    | ⬜   |
 | 21  | 数学        | 6   | [阅读](/article/top150-21-math)                | ✅   |
 | 22  | 一维动态规划    | 5   | [阅读](/article/top150-22-1d-dp)               | ✅   |
-| 23  | 多维动态规划    | 9   | [阅读](/article/top150-23-multidimensional-dp) | ⬜   |
+| 23  | 多维动态规划    | 9   | [阅读](/article/top150-23-multidimensional-dp) | ✅   |
 
