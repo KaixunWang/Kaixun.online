@@ -5,7 +5,8 @@ tags: ['Top150', '二叉搜索树']
 id: "top150-11-binary-search-tree"
 date: 2026-06-22 12:00:00
 cover: "/assets/images/covers/top150/11-binary-search-tree.svg"
-hide: true
+hide: false
+updated: 2026-06-30 07:30:49
 recommend: false
 top: false
 ---
@@ -24,18 +25,34 @@ BST 中序性质、验证与第 K 小元素。
 
 ### 思路
 
-<!-- 待填 -->
+利用中序遍历有序的特点，比较每一次和上一次的元素的差即可
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    int min = Integer.MAX_VALUE;
+    TreeNode prev = null;
+
+    public int getMinimumDifference(TreeNode root) {
+        inorder(root);
+        return min;
+    }
+
+    public void inorder(TreeNode node) {
+        if (node == null) return;
+        inorder(node.left);
+        if (prev != null) min = Math.min(min, node.val - prev.val);
+        prev = node;
+        inorder(node.right);
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(h)$
 
 ### 备注
 
@@ -51,18 +68,41 @@ BST 中序性质、验证与第 K 小元素。
 
 ### 思路
 
-<!-- 待填 -->
+中序遍历做计数
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    int cnt = 0;
+    int ans = 0;
+    int k = 0;
+    boolean found = false;
+
+    public int kthSmallest(TreeNode root, int k) {
+        this.k = k;
+        inorder(root);
+        return ans;
+    }
+
+    public void inorder(TreeNode node) {
+        if (node == null || found) return;
+        inorder(node.left);
+        cnt++;
+        if (cnt == k) {
+            ans = node.val;
+            found = true;
+            return;
+        }
+        inorder(node.right);
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 
@@ -78,18 +118,32 @@ BST 中序性质、验证与第 K 小元素。
 
 ### 思路
 
-<!-- 待填 -->
+中序遍历维护上一个访问的元素，判断是否递增即可
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    TreeNode prev = null;
+
+    public boolean isValidBST(TreeNode root) {
+        return inorder(root);
+    }
+
+    public boolean inorder(TreeNode node) {
+        if (node == null) return true;
+        if (!inorder(node.left)) return false;
+        if (prev != null && node.val <= prev.val) return false;
+        prev = node;
+        return inorder(node.right);
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 
