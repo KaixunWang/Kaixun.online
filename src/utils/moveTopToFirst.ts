@@ -1,8 +1,6 @@
 export default (arr: Array<any>) => {
-  const index = arr.findIndex((item: any) => item.data.top === true);
-  if (index !== -1) {
-    const [item] = arr.splice(index, 1);
-    arr.unshift(item);
-  }
+  const tops = arr.filter((item: any) => item.data.top === true);
+  const rest = arr.filter((item: any) => item.data.top !== true);
+  if (tops.length) arr.splice(0, arr.length, ...tops, ...rest);
   return arr;
 }

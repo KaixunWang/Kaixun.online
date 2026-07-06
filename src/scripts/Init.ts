@@ -11,6 +11,8 @@ import videoInit from "@/scripts/Video";
 import musicInit from "@/scripts/Music";
 // 初始化 LivePhoto
 import livePhotoInit from '@/scripts/LivePhoto'
+// 初始化 PDF 预览
+import pdfInit from "@/scripts/Pdf";
 // 初始化BackTop组件
 import BackTopInitFn from "@/scripts/BackTop";
 // 搜索
@@ -62,6 +64,8 @@ const indexInit = async (only: boolean = true) => {
   vhLzImgInit();
   // 初始化 LivePhoto
   livePhotoInit();
+  // 初始化 PDF 预览
+  pdfInit();
   // 文章视频播放器初始化
   videoInit(videoList);
   // 文章音乐播放器初始化

@@ -420,6 +420,52 @@
         overflow: hidden;
       }
 
+      // ::pdf
+      &.vh-pdf {
+        margin: 1.188rem 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border: solid 1px var(--vh-font-16);
+        border-radius: 5px;
+        background-color: var(--vh-white-color);
+        overflow: hidden;
+
+        .vh-pdf-preview {
+          width: 100%;
+          aspect-ratio: 210 / 297;
+          background-color: var(--vh-font-6);
+          overflow: hidden;
+
+          iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+          }
+        }
+
+        .vh-pdf-fallback {
+          margin: 0;
+          padding: 0.75rem 0.888rem;
+          border-top: solid 1px var(--vh-font-16);
+          background-color: var(--vh-font-6);
+          font-size: 0.875rem;
+          line-height: 1.6;
+
+          a {
+            color: var(--vh-font-56);
+            box-shadow: inset 0 -.12rem var(--vh-main-color);
+            transition: box-shadow .2s ease-in-out, color .2s ease-in-out;
+
+            &:hover {
+              box-shadow: inset 0 -1.5rem var(--vh-main-color-28);
+            }
+          }
+        }
+      }
+
       // ::vhMusic
       &.vh-vhMusic {
         margin: 1.188rem 0;
@@ -636,6 +682,26 @@
             &:hover {
               height: 0.56rem;
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .main-inner {
+
+    &>section,
+    &>article {
+      .vh-node {
+        &.vh-pdf {
+          .vh-pdf-preview {
+            display: none;
+          }
+
+          .vh-pdf-fallback {
+            border-top: 0;
           }
         }
       }
