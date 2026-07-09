@@ -52,6 +52,9 @@ export default defineConfig({
 		syntaxHighlight: 'shiki',
 		shikiConfig: { theme: 'github-light' },
 	},
-	vite: { resolve: { alias: { "@": path.resolve(__dirname, "./src") } } },
+	vite: {
+		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+		optimizeDeps: { exclude: ["pdfjs-dist"] },
+	},
 	server: { host: '0.0.0.0' }
 });

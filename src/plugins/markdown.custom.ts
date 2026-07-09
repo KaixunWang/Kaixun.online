@@ -78,17 +78,7 @@ const addClassNames = () => {
               type: 'element',
               tagName: 'div',
               properties: { class: 'vh-pdf-preview' },
-              children: [{
-                type: 'element',
-                tagName: 'iframe',
-                properties: {
-                  src,
-                  title,
-                  loading: 'lazy',
-                  referrerpolicy: 'no-referrer-when-downgrade',
-                },
-                children: [],
-              }],
+              children: [],
             },
             {
               type: 'element',

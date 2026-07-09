@@ -435,14 +435,33 @@
         .vh-pdf-preview {
           width: 100%;
           aspect-ratio: 210 / 297;
+          max-height: 90vh;
           background-color: var(--vh-font-6);
-          overflow: hidden;
+          overflow-x: hidden;
+          overflow-y: auto;
 
-          iframe {
-            display: block;
-            width: 100%;
+          .vh-pdf-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 12rem;
             height: 100%;
-            border: 0;
+            color: var(--vh-font-56);
+            font-size: 0.875rem;
+          }
+
+          .vh-pdf-page {
+            width: 100%;
+
+            & + .vh-pdf-page {
+              margin-top: 0.5rem;
+            }
+
+            canvas {
+              display: block;
+              width: 100%;
+              height: auto;
+            }
           }
         }
 
@@ -697,11 +716,7 @@
       .vh-node {
         &.vh-pdf {
           .vh-pdf-preview {
-            display: none;
-          }
-
-          .vh-pdf-fallback {
-            border-top: 0;
+            max-height: 70vh;
           }
         }
       }
