@@ -30,8 +30,8 @@ top: true
 | 10  | 二叉树层次遍历   | 4   | [阅读](/article/top150-10-binary-tree-bfs)     | ✅   |
 | 11  | 二叉搜索树     | 3   | [阅读](/article/top150-11-binary-search-tree)  | ✅   |
 | 12  | 图         | 6   | [阅读](/article/top150-12-graph)               | ✅   |
-| 13  | 图的广度优先搜索  | 3   | [阅读](/article/top150-13-graph-bfs)           | ⬜   |
-| 14  | 字典树       | 3   | [阅读](/article/top150-14-trie)                | ⬜   |
+| 13  | 图的广度优先搜索  | 3   | [阅读](/article/top150-13-graph-bfs)           | ✅   |
+| 14  | 字典树       | 3   | [阅读](/article/top150-14-trie)                | ✅   |
 | 15  | 回溯        | 7   | [阅读](/article/top150-15-backtracking)        | ⬜   |
 | 16  | 分治        | 4   | [阅读](/article/top150-16-divide-and-conquer)  | ✅   |
 | 17  | Kadane 算法 | 2   | [阅读](/article/top150-17-kadane)              | ✅   |
