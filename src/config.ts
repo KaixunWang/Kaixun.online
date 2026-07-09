@@ -10,7 +10,7 @@ export default {
     enable: true,
     HomeHeight: '38.88rem',
     PageHeight: '28.88rem',
-    background: "url('/assets/images/home-banner.webp') no-repeat center 60%/cover",
+    background: "url('/assets/images/15-Sequoia-Sunrise.webp') no-repeat center 60%/cover",
   },
   Theme: {
     '--vh-main-color': '#01C4B6',
