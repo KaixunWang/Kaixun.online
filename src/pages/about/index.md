@@ -48,7 +48,7 @@ type: "about"
 <tr><th>时间</th><th>学位</th><th>院校</th><th>GPA</th></tr>
 </thead>
 <tbody>
-<tr><td>2023 – 2027</td><td>计算机科学与工程 本科</td><td>南方科技大学（深圳）</td><td>3.7 / 4.0</td></tr>
+<tr><td>2023 – 2027</td><td>计算机科学与工程 本科</td><td>南方科技大学（深圳）</td><td>3.74 / 4.0</td></tr>
 </tbody>
 </table>
 </section>
@@ -267,7 +267,7 @@ type: "about"
 <tr><th>Year</th><th>Degree</th><th>Institute</th><th>GPA</th></tr>
 </thead>
 <tbody>
-<tr><td>2023 – 2027</td><td>B.Eng. Computer Science and Engineering</td><td>SUSTech, Shenzhen</td><td>3.7 / 4.0</td></tr>
+<tr><td>2023 – 2027</td><td>B.Eng. Computer Science and Engineering</td><td>SUSTech, Shenzhen</td><td>3.74 / 4.0</td></tr>
 </tbody>
 </table>
 </section>
