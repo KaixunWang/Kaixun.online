@@ -252,7 +252,7 @@ class Trie {
 
 ### 复杂度
 
-- 时间：$O(m*n*4*3^{l-1})$，上界可写 $O(m*n*4^l)$
+- 时间：$O(m \cdot n \cdot 4 \cdot 3^{l-1})$，上界可写 $O(m \cdot n \cdot 4^l)$
 - 空间：$O(w + l)$（$w$ 为词表总字符数，Trie 节点；$l$ 为最长单词长度，DFS 栈）
 
 ### 备注

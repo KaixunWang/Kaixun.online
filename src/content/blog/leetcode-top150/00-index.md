@@ -32,7 +32,7 @@ top: true
 | 12  | 图         | 6   | [阅读](/article/top150-12-graph)               | ✅   |
 | 13  | 图的广度优先搜索  | 3   | [阅读](/article/top150-13-graph-bfs)           | ✅   |
 | 14  | 字典树       | 3   | [阅读](/article/top150-14-trie)                | ✅   |
-| 15  | 回溯        | 7   | [阅读](/article/top150-15-backtracking)        | ⬜   |
+| 15  | 回溯        | 7   | [阅读](/article/top150-15-backtracking)        | ✅   |
 | 16  | 分治        | 4   | [阅读](/article/top150-16-divide-and-conquer)  | ✅   |
 | 17  | Kadane 算法 | 2   | [阅读](/article/top150-17-kadane)              | ✅   |
 | 18  | 二分查找      | 7   | [阅读](/article/top150-18-binary-search)       | ✅   |

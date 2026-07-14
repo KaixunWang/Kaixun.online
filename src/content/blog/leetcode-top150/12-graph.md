@@ -66,7 +66,7 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O(m*n)$
+- 时间：$O(m \cdot n)$
 - 空间：$O(m*n)$
 
 ### 备注
@@ -130,7 +130,7 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O(m*n)$
+- 时间：$O(m \cdot n)$
 - 空间：$O(m*n)$
 
 ### 备注
