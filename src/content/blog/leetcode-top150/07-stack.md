@@ -29,7 +29,44 @@ top: false
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        int n = s.length();
+        stack.push(s.charAt(0));
+        for (int i = 1; i < n; i++) {
+            char cur = s.charAt(i);
+            if(cur == '(' || cur == '{' || cur == '['){
+                stack.push(cur);
+                continue;
+            }
+            if(stack.isEmpty())return false;
+            char inStack = stack.pop();
+            if(cur == ')'){
+                if(inStack == '('){
+                    continue;
+                }else{
+                    return false;
+                }
+            }
+            if(cur == '}'){
+                if(inStack == '{'){
+                    continue;
+                }else{
+                    return false;
+                }
+            }
+            if(cur == ']'){
+                if(inStack == '['){
+                    continue;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+}
 ```
 
 ### 复杂度
@@ -56,7 +93,27 @@ top: false
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public String simplifyPath(String path) {
+        String[] strs = path.split("/");
+        Stack<String> stack = new Stack<>();
+        for (String s : strs) {
+            if(s.isEmpty() || s.equals(".")){
+                continue;
+            }
+            if(!s.equals("..")){
+                stack.add(s);
+            }else if(!stack.isEmpty()){
+                stack.pop();
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String dir : stack) {
+            sb.append("/").append(dir);
+        }
+        return sb.length() == 0 ? "/" : sb.toString();
+    }
+}
 ```
 
 ### 复杂度
