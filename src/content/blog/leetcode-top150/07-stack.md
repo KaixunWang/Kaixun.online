@@ -140,7 +140,33 @@ class Solution {
 ### 代码
 
 ```java
-// 待填
+class MinStack {
+    PriorityQueue<Integer> pq;
+    Stack<Integer> stack;
+    
+    public MinStack() {
+        pq = new PriorityQueue<>();
+        stack = new Stack<>();
+    }
+    
+    public void push(int value) {
+        stack.push(value);
+        pq.add(value);
+    }
+    
+    public void pop() {
+        int temp = stack.pop();
+        pq.remove(temp);
+    }
+    
+    public int top() {
+        return stack.peek();
+    }
+    
+    public int getMin() {
+        return pq.peek();
+    }
+}
 ```
 
 ### 复杂度
@@ -150,7 +176,44 @@ class Solution {
 
 ### 备注
 
-<!-- 待填 -->
+用两个栈模拟可以全部$O(1)$
+```java
+class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> minStack;
+
+    public MinStack() {
+        stack = new Stack<>();
+        minStack = new Stack<>();
+    }
+    
+    public void push(int value) {
+        stack.push(value);
+        if(minStack.isEmpty()){
+            minStack.push(value);
+            return;
+        }
+        if(value < minStack.peek()){
+            minStack.push(value);
+        }else{
+            minStack.push(minStack.peek());
+        }
+    }
+    
+    public void pop() {
+        stack.pop();
+        minStack.pop();
+    }
+    
+    public int top() {
+        return stack.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
+```
 
 ---
 
@@ -167,7 +230,42 @@ class Solution {
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int evalRPN(String[] tokens) {
+        int cur =0;
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < tokens.length; i++) {
+            if(isNum(tokens[i])){
+                stack.push(Integer.parseInt(tokens[i]));
+            }else{
+                int b = stack.pop();
+                int a = stack.pop();
+                switch (tokens[i]) {
+                    case "+":
+                        stack.push(a+b);
+                        break;
+                    case "-":
+                        stack.push(a-b);
+                        break;
+                    case "*":
+                        stack.push(a*b);
+                        break;
+                    default:
+                        stack.push(a/b);
+                        break;
+                }
+            }
+        }
+        return stack.peek();
+    }
+
+    public boolean isNum(String a){
+        if(a.length() > 1 && a.charAt(0) == '-'){
+            return true;
+        }
+        return Character.isDigit(a.charAt(0));
+    }
+}
 ```
 
 ### 复杂度
@@ -189,12 +287,123 @@ class Solution {
 
 ### 思路
 
-<!-- 待填 -->
+通用方法rpn
 
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int calculate(String s) {
+        List<String> rpn = toRPN(s);
+        Stack<Integer> stack = new Stack<>();
+
+        for (String str : rpn) {
+            if (!str.equals("+") && !str.equals("-")) {
+                stack.push(Integer.parseInt(str));
+            } else {
+                int b = stack.pop();
+                int a = stack.pop();
+
+                if (str.equals("+")) {
+                    stack.push(a + b);
+                } else {
+                    stack.push(a - b);
+                }
+            }
+        }
+
+        return stack.pop();
+    }
+
+
+    public List<String> toRPN(String s) {
+        List<String> ans = new ArrayList<>();
+        Stack<Character> op = new Stack<>();
+
+        int i = 0;
+
+        while (i < s.length()) {
+            char c = s.charAt(i);
+
+            if (c == ' ') {
+                i++;
+                continue;
+            }
+
+            // 数字
+            if (Character.isDigit(c)) {
+                int num = 0;
+
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    num = num * 10 + (s.charAt(i) - '0');
+                    i++;
+                }
+
+                ans.add(String.valueOf(num));
+                continue;
+            }
+
+
+            // 处理负号
+            if (c == '-') {
+                boolean unary = false;
+
+                if (i == 0) {
+                    unary = true;
+                } else {
+                    int j = i - 1;
+
+                    // 跳过空格
+                    while (j >= 0 && s.charAt(j) == ' ') {
+                        j--;
+                    }
+
+                    if (j < 0 || s.charAt(j) == '(' 
+                            || s.charAt(j) == '+' 
+                            || s.charAt(j) == '-') {
+                        unary = true;
+                    }
+                }
+
+                if (unary) {
+                    ans.add("0");
+                }
+            }
+
+
+            // 左括号
+            if (c == '(') {
+                op.push(c);
+            }
+
+            // 右括号
+            else if (c == ')') {
+                while (op.peek() != '(') {
+                    ans.add(String.valueOf(op.pop()));
+                }
+                op.pop();
+            }
+
+            // 运算符
+            else {
+                while (!op.isEmpty() && op.peek() != '(') {
+                    ans.add(String.valueOf(op.pop()));
+                }
+
+                op.push(c);
+            }
+
+            i++;
+        }
+
+
+        while (!op.isEmpty()) {
+            ans.add(String.valueOf(op.pop()));
+        }
+
+        return ans;
+    }
+}
 ```
 
 ### 复杂度
@@ -204,6 +413,52 @@ class Solution {
 
 ### 备注
 
-<!-- 待填 -->
+因为只有加减法，可以用栈储存符号和结果
+```java
+class Solution {
+    public int calculate(String s) {
+        int result =0;
+        int sign = 1;
+        int num = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            switch (s.charAt(i)) {
+            case '+':
+                result += sign * num;
+                sign = 1;
+                num =0;
+                break;
+            case '-':
+                result += sign * num;
+                sign = -1;
+                num =0;
+                break;
+            case '(':
+                stack.push(result);
+                stack.push(sign);
+                result = 0;
+                sign = 1;
+                num = 0;
+                break;
+            case ')':
+                result += sign*num;
+                num =0;
+                int oldSign = stack.pop();
+                int oldRes = stack.pop();
+                result = oldRes + oldSign * result;
+                break;
+            case ' ':
+                break;
+            default:
+                num = num * 10 + s.charAt(i)-'0';
+                break;   
+            }
+        }
+
+        return result + sign * num;
+    }
+}
+```
 
 ---
