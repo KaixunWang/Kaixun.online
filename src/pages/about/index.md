@@ -208,6 +208,7 @@ type: "about"
 <section class="cv-block">
 <h3>证书与奖项</h3>
 <ul class="cv-list">
+<li><strong>GRE 322</strong>（Verbal 152 + Quantitative 170）</li>
 <li><strong>TOEFL 5.5/6</strong>（约合老托福 110/120）</li>
 <li><strong>CET-6 594</strong> · <strong>CET-4 639</strong>（2024、2025）</li>
 <li>全国大学生英语竞赛（NECCS）<strong>全国三等奖</strong>（2025）</li>
@@ -427,6 +428,7 @@ type: "about"
 <section class="cv-block">
 <h3>Certifications & Awards</h3>
 <ul class="cv-list">
+<li><strong>GRE 322</strong> (Verbal 152 + Quantitative 170)</li>
 <li><strong>TOEFL 5.5/6</strong> (≈ legacy TOEFL 110/120)</li>
 <li><strong>CET-6 594</strong> · <strong>CET-4 639</strong> (2024, 2025)</li>
 <li><strong>National Third Prize</strong>, NECCS (2025)</li>
