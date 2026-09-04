@@ -29,7 +29,29 @@ top: false
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        int[][] row = new int[9][9];
+        int[][] col = new int[9][9];
+        int[][] cube = new int[9][9];
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(board[i][j] != '.') {
+                    int curCube = (i / 3) * 3 + (j / 3);
+                    int cur = Integer.parseInt(Character.toString(board[i][j])) - 1;
+                    if (row[i][cur] != 0 || col[j][cur] != 0 || cube[curCube][cur] != 0) {
+                        return false;
+                    }
+                    row[i][cur] = 1;
+                    col[j][cur] = 1;
+                    cube[curCube][cur] = 1;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### 复杂度
@@ -56,7 +78,59 @@ top: false
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int top=-1,left=-1;
+        int bottom = m;
+        int right = n;
+
+        List<Integer> ans = new ArrayList<>();
+
+        int dx = 1;
+        int dy = 0;
+
+        int i = 0;
+        int j = 0;
+
+        while(ans.size() < m * n){
+            ans.add(matrix[i][j]);
+            int ni = i+dy;
+            int nj = j+dx;
+
+            if(ni == top){
+                dx = 1;
+                dy = 0;
+                left =j;
+                i = i + dy;
+                j = j + dx;
+            }else if(ni ==bottom){
+                dx = -1;
+                dy = 0;
+                right = j;
+                i = i + dy;
+                j = j + dx;
+            }else if(nj == left){
+                dx = 0;
+                dy = -1;
+                bottom = i;
+                i = i + dy;
+                j = j + dx;
+            }else if(nj == right){
+                dx =0;
+                dy =1;
+                top = i;
+                i = i + dy;
+                j = j + dx;
+            }else{
+                i=ni;
+                j=nj;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### 复杂度
@@ -83,7 +157,29 @@ top: false
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public void rotate(int[][] matrix) {
+        //transpose
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < i; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        //上下翻转
+        for (int[] col : matrix) {
+            int top = 0, bottom = col.length - 1;
+            while (top < bottom) {
+                int tmp = col[top];
+                col[top] = col[bottom];
+                col[bottom] = tmp;
+                top++;
+                bottom--;
+            }
+        }
+    }
+}
 ```
 
 ### 复杂度
