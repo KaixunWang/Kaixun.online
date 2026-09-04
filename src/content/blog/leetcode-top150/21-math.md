@@ -3,7 +3,7 @@ title: "Top 150 · 数学（6 题）"
 categories: LeetCode
 tags: ['Top150', '数学']
 id: "top150-21-math"
-date: 2026-06-22 12:00:00
+date: 2026-06-25 15:43:37
 updated: 2026-06-25 03:30:49
 cover: "/assets/images/covers/top150/21-math.svg"
 hide: false

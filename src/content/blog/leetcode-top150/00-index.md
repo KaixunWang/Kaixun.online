@@ -3,7 +3,7 @@ title: "LeetCode 面试经典 150 题 · 学习索引"
 categories: LeetCode
 tags: ['Top150', 'LeetCode', '面试']
 id: "top150-index"
-date: 2026-06-22 12:00:00
+date: 2026-09-04 16:45:00
 cover: "/assets/images/covers/top150/index.svg"
 hide: false
 recommend: true
@@ -21,10 +21,10 @@ top: true
 | 01  | 数组 / 字符串  | 24  | [阅读](/article/top150-01-array-string)        | ⬜   |
 | 02  | 双指针       | 5   | [阅读](/article/top150-02-two-pointers)        | ⬜   |
 | 03  | 滑动窗口      | 4   | [阅读](/article/top150-03-sliding-window)      | ⬜   |
-| 04  | 矩阵        | 5   | [阅读](/article/top150-04-matrix)              | ⬜   |
-| 05  | 哈希表       | 9   | [阅读](/article/top150-05-hashmap)             | ⬜   |
-| 06  | 区间        | 4   | [阅读](/article/top150-06-intervals)           | ⬜   |
-| 07  | 栈         | 5   | [阅读](/article/top150-07-stack)               | ⬜   |
+| 04  | 矩阵        | 5   | [阅读](/article/top150-04-matrix)              | ✅   |
+| 05  | 哈希表       | 9   | [阅读](/article/top150-05-hashmap)             | ✅   |
+| 06  | 区间        | 4   | [阅读](/article/top150-06-intervals)           | ✅   |
+| 07  | 栈         | 5   | [阅读](/article/top150-07-stack)               | ✅   |
 | 08  | 链表        | 11  | [阅读](/article/top150-08-linked-list)         | ✅   |
 | 09  | 二叉树       | 14  | [阅读](/article/top150-09-binary-tree)         | ✅   |
 | 10  | 二叉树层次遍历   | 4   | [阅读](/article/top150-10-binary-tree-bfs)     | ✅   |

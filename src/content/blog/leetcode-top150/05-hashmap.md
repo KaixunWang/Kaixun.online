@@ -3,9 +3,9 @@ title: "Top 150 · 哈希表（9 题）"
 categories: LeetCode
 tags: ['Top150', '哈希表']
 id: "top150-05-hashmap"
-date: 2026-06-22 12:00:00
+date: 2026-09-04 16:42:53
 cover: "/assets/images/covers/top150/05-hashmap.svg"
-hide: true
+hide: false
 recommend: false
 top: false
 ---
@@ -51,8 +51,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(m+n)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -92,8 +92,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(k)$
 
 ### 备注
 
@@ -136,8 +136,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 
@@ -176,8 +176,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(k)$
 
 ### 备注
 
@@ -228,8 +228,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n \cdot k)$
+- 空间：$O(n \cdot k)$
 
 ### 备注
 
@@ -267,8 +267,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 
@@ -314,8 +314,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(\log n)$
+- 空间：$O(\log n)$
 
 ### 备注
 
@@ -352,8 +352,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 
@@ -374,13 +374,36 @@ class Solution {
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length ==0 || nums.length == 1)return nums.length;
+        HashSet<Integer> set = new HashSet<>();
+        int ans = 1;
+
+        for (int i = 0; i < nums.length; i++) {
+            set.add(nums[i]);
+        }
+
+        for(int num:set){
+            if(!set.contains(num-1)){
+                int start = num;
+                int temp = 1;
+                while(set.contains(start+1)){
+                    start++;
+                    temp++;
+                }
+                ans = Math.max(temp,ans);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 

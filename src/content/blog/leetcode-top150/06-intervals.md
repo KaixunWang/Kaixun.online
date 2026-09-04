@@ -3,9 +3,9 @@ title: "Top 150 · 区间（4 题）"
 categories: LeetCode
 tags: ['Top150', '区间']
 id: "top150-06-intervals"
-date: 2026-06-22 12:00:00
+date: 2026-09-04 16:43:11
 cover: "/assets/images/covers/top150/06-intervals.svg"
-hide: true
+hide: false
 recommend: false
 top: false
 ---
@@ -62,8 +62,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -118,8 +118,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n \log n)$
+- 空间：$O(n)$
 
 ### 备注
 
@@ -175,8 +175,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n)$
+- 空间：$O(n)$
 
 ### 备注
 
@@ -223,8 +223,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n \log n)$
+- 空间：$O(1)$
 
 ### 备注
 

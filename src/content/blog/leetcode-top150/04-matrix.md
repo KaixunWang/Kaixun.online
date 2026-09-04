@@ -3,9 +3,9 @@ title: "Top 150 · 矩阵（5 题）"
 categories: LeetCode
 tags: ['Top150', '矩阵']
 id: "top150-04-matrix"
-date: 2026-06-22 12:00:00
+date: 2026-09-04 16:42:35
 cover: "/assets/images/covers/top150/04-matrix.svg"
-hide: true
+hide: false
 recommend: false
 top: false
 ---
@@ -56,8 +56,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(1)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -135,8 +135,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(mn)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -184,8 +184,8 @@ class Solution {
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(n^2)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -206,13 +206,56 @@ class Solution {
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        boolean diyihangyou0 = false;
+        boolean diyilieyou0 = false;
+        int length = matrix.length;
+        int width = matrix[0].length;
+        for(int i=0;i<width;i++){
+            if(matrix[0][i] == 0){
+                diyihangyou0 = true;
+                break;
+            } 
+        }
+        for(int i=0;i<length;i++){
+            if(matrix[i][0] == 0){
+                diyilieyou0 = true;
+                break;
+            } 
+        }
+        for(int i=1;i<length;i++){
+            for(int j =1;j<width;j++){
+                if(matrix[i][j] ==0){
+                    matrix[i][0]=0;
+                    matrix[0][j]=0;
+                }
+            }
+        }
+        for(int i=1;i<length;i++){
+           for(int j=1;j<width;j++){
+           if(matrix[i][0] ==0 || matrix[0][j]==0){
+            matrix[i][j]=0;
+           }
+            }
+        }
+        if(diyilieyou0){
+            for(int[] row: matrix){
+                row[0] =0;
+
+            }
+        }
+        if(diyihangyou0){
+            Arrays.fill(matrix[0],0);
+        }
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(mn)$
+- 空间：$O(1)$
 
 ### 备注
 
@@ -233,13 +276,61 @@ class Solution {
 ### 代码
 
 ```java
-// 待填
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+        
+        // 八个方向
+        int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int liveNeighbors = 0;
+                // 统计原始活细胞邻居数
+                for (int k = 0; k < 8; k++) {
+                    int ni = i + dx[k];
+                    int nj = j + dy[k];
+                    if (ni >= 0 && ni < m && nj >= 0 && nj < n) {
+                        // 原始状态为活：1 或 2
+                        if (board[ni][nj] == 1 || board[ni][nj] == 2) {
+                            liveNeighbors++;
+                        }
+                    }
+                }
+                
+                // 根据规则更新
+                if (board[i][j] == 1) { // 当前是活细胞
+                    if (liveNeighbors < 2 || liveNeighbors > 3) {
+                        board[i][j] = 2; // 活 -> 死
+                    }
+                } else { // 当前是死细胞
+                    if (liveNeighbors == 3) {
+                        board[i][j] = -1; // 死 -> 活
+                    }
+                }
+            }
+        }
+        
+        // 转换为最终状态
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == 2) {
+                    board[i][j] = 0;
+                } else if (board[i][j] == -1) {
+                    board[i][j] = 1;
+                }
+            }
+        }
+    }
+}
 ```
 
 ### 复杂度
 
-- 时间：$O()$
-- 空间：$O()$
+- 时间：$O(mn)$
+- 空间：$O(1)$
 
 ### 备注
 
